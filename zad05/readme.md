@@ -11,4 +11,4 @@ Trajalo je 1,033 sekundi.
 Izvodile su se na 5 različitih dretvi.
 
 # PITANJE 5:
-Istovremeni pristup može rezultirati neželjenim ponašanjem u slučaju kada dvije različite dretve dohvate neku trenutnu vrijednost u točno istom trenutku, dohvatit će istu vrijednost te nakon što ju obje povećaju i spreme, vrijednost će se povećati za jedan, iako se trebala povećati za dva, kako bi se inače povećala da su je dretve dohvatile u različitim trenucima.
+Istovremeni pristup može rezultirati neželjenim ponašanjem u slučaju kada dvije različite dretve dohvate neku trenutnu vrijednost u točno istom trenutku, dohvatit će istu vrijednost te nakon što ju obje npr. povećaju i spreme natrag, vrijednost će se povećati za jedan, iako se trebala povećati za dva, kako bi se inače povećala da su je dretve dohvatile u različitim trenucima.
