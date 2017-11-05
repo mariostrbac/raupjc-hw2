@@ -30,7 +30,17 @@ namespace zad04
         }
 
         public static University[] Linq2_2(University[] universityArray)
-        {         
+        {
+
+            /*var nameCount = universityArray.Select(t => new object[2]
+            {
+                t.Name,
+                t.Students.Length
+            });
+
+            float avg = nameCount.Average(x => (float) x[1]);
+            */
+
             float avg = universityArray.Select(t => new object[2]
             {
                 t.Name,
