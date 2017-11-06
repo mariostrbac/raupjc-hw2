@@ -32,20 +32,11 @@ namespace zad04
         public static University[] Linq2_2(University[] universityArray)
         {
 
-            /*var nameCount = universityArray.Select(t => new object[2]
-            {
-                t.Name,
-                t.Students.Length
-            });
-
-            float avg = nameCount.Average(x => (float) x[1]);
-            */
-
             float avg = universityArray.Select(t => new object[2]
             {
                 t.Name,
                 t.Students.Length
-            }).Average(x => (float)x[1]);
+            }).Average(x => float.Parse(x[1].ToString()));
 
             return universityArray.Where(t => t.Students.Length < avg).ToArray();
         }
@@ -66,11 +57,13 @@ namespace zad04
 
         public static Student[] Linq2_5(University[] universityArray)
         {
-            return universityArray.SelectMany(t => t.Students).GroupBy(x => x.Jmbag).Select(x=> new object[2]
+            var jmbags = universityArray.SelectMany(t => t.Students).GroupBy(x => x.Jmbag).Select(x => new 
             {
-                x,
-                x.Count()
-            }).Where(t=> (int)t[1] > 1).Select(i=> (Student)i[0]).ToArray();
+                x.Key,
+                Count = x.Count()
+            }).Where(t => (int)t.Count > 1).Select(i => i.Key).ToList();
+
+            return Linq2_3(universityArray).Where(s => jmbags.Contains(s.Jmbag)).ToArray();
         }
     }
 }
