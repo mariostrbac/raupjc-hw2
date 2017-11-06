@@ -11,10 +11,10 @@ namespace zad02
     /// </summary>
     public class TodoRepository : ITodoRepository
     {
-        /// <summary >
-        /// Repository does not fetch todoItems from the actual database ,
-        /// it uses in memory storage for this excersise .
-        /// </ summary >
+        /// <summary>
+        /// Repository does not fetch todoItems from the actual database,
+        /// it uses in memory storage for this excersise.
+        /// </summary>
         private readonly IGenericList <TodoItem> _inMemoryTodoDateBase;
 		
         public TodoRepository (IGenericList <TodoItem> initialDbState = null)
@@ -30,13 +30,12 @@ namespace zad02
         }
 
 
-        public TodoItem Get(Guid todoId) //mozda bez ovih if-ova, samo return
+        public TodoItem Get(Guid todoId) 
         {
             if (_inMemoryTodoDateBase.Any(t => t.Id.Equals(todoId)))
             {
                 return _inMemoryTodoDateBase.First(t => t.Id.Equals(todoId));
             }
-
             return null;
         }
 
@@ -46,10 +45,8 @@ namespace zad02
             {
                 if (Get(todoItem.Id) != null)
                 {
-                    throw new System.ArgumentException("duplicate id:",
-                        todoItem.Id.ToString()); //DuplicateTodoItemException
+                    throw new DuplicateTodoItemException(string.Format("duplicate id = {0}",todoItem.Id));
                 }
-
                 _inMemoryTodoDateBase.Add(todoItem);
                 return todoItem;
             }
@@ -112,6 +109,14 @@ namespace zad02
         public List<TodoItem> GetFiltered(Func<TodoItem, bool> filterFunction)
         {
             return GetAll().Where(filterFunction).ToList();
+        }
+    }
+
+    public class DuplicateTodoItemException : Exception
+    {
+        public DuplicateTodoItemException(string duplicateIdTodoitemId)
+        {
+            Console.WriteLine(duplicateIdTodoitemId);
         }
     }
 }
