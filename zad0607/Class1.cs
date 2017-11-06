@@ -61,7 +61,7 @@ namespace zad0607
             return  await IKnowWhoKnowsThis(10) + await IKnowWhoKnowsThis(5);
         }
 
-        private async static  Task<int>  IKnowWhoKnowsThis(int n)
+        private static async Task<int>  IKnowWhoKnowsThis(int n)
         {
             return  FactorialDigitSum(n).Result;
         }
