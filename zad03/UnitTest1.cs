@@ -18,6 +18,30 @@ namespace zad03
             Assert.AreEqual(testItem, repositoty.Get(testId));
         }
 
+        [TestMethod]
+        [ExpectedException(typeof(DuplicateTodoItemException),"Adding existing item.")]
+        public void AddDuplicateItem()
+        {
+            TodoItem testItem = new TodoItem("Test item");
+            var repositoty = GetTodoRepository();
+
+            repositoty.Add(testItem);
+            repositoty.Add(testItem);
+        }
+
+        [TestMethod]
+        public void RemoveTodoItem()
+        {
+            TodoItem testItem = new TodoItem("Test item");
+            Guid testId = testItem.Id;
+            var repositoty = GetTodoRepository();
+
+            repositoty.Add(testItem);
+            Assert.AreEqual(testItem, repositoty.Get(testId));          //item added
+            Assert.AreEqual(true, repositoty.Remove(testId));           //item removed
+            Assert.AreEqual(null, repositoty.Get(testId));              //returns null
+        }
+
         private static TodoRepository GetTodoRepository()
         {
             return new TodoRepository(new GenericList<TodoItem>
